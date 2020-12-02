@@ -3,13 +3,13 @@
 namespace App\Models;
 
 
-Use Core\Model;
+Use Core\Request;
 Use App\Models\Livre;
 use PDO;
 use Exception;
 
 
-class LivreManager extends Model
+class LivreManager extends Request
 {
     private $livres; //tableau de livre
 
@@ -24,30 +24,21 @@ class LivreManager extends Model
         return $this->livres;
     }
 
-    public function chargementLivres()
-    {
-        $req = $this->getBdd()->prepare("SELECT * FROM livres");
-        $req->execute();
-        $mesLivres = $req->fetchAll(PDO::FETCH_ASSOC);
-        $req->closeCursor();
-        // echo "<pre>";
-        // print_r($mesLivres);
-        // echo "<pre>";
-        foreach ($mesLivres as $livre) {
-            $l = new Livre($livre['id'], $livre['titre'], $livre['nbPages'], $livre['image']);
-            $this->ajoutLivre($l);
-        }
-    }
-
-    public function getLivreById($id)
-    {
-        for ($i = 0; count($this->livres); $i++) {
-            if ($this->livres[$i]->getId() === $id) {
-                return $this->livres[$i];
-            }
-        }
-        throw new Exception("Le livre n'existe pas");
-    }
+    // public function getLivreById($id)
+    // {
+    //     // for ($i = 0; count($this->livres); $i++) {
+    //     //     if ($this->livres[$i]->getId() === $id) {
+    //     //         return $this->livres[$i];
+    //     //     }
+    //     // }
+    //     var_dump($this->livres);
+    //     foreach($this->livres as $livre){
+    //         if($livre['id'] === $id){
+    //             return $this->livres;
+    //         }
+    //     }
+    //     throw new Exception("Le livre n'existe pas");
+    // }
 
     public function ajoutLivrebdd($titre, $nbPages, $image)
     {
@@ -72,7 +63,7 @@ class LivreManager extends Model
         $result = $stmt->execute();
         $stmt->closeCursor();
         if ($result > 0) {
-            $livre = $this->getLivreById($id);
+            $livre = $this->findById("livres",$id);
             unset($livre);
         }
     }

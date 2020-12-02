@@ -14,18 +14,17 @@ class FormatController
     public function __construct()
     {
         $this->formatManager = new FormatManager;
-        $this->formatManager->chargementFormats();
-    }
-
-    public function findAllFormats()
-    {
-        $format = $this->formatManager->getFormats();
-        require 'views/format.php';
     }
 
     public function findOneFormat($id)
     {
         $format = $this->formatManager->getFormatById($id);
         require 'views/oneformat.php';
+    }
+
+    public function displayFormat()
+    {
+        $format = $this->formatManager->findAll('format');
+        require 'views/format.php';
     }
 } 

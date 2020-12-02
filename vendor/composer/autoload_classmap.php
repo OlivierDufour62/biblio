@@ -12,5 +12,6 @@ return array(
     'App\\Models\\FormatManager' => $baseDir . '/src/Models/Format/FormatManager.php',
     'App\\Models\\Livre' => $baseDir . '/src/Models/Livre/Livre.php',
     'App\\Models\\LivreManager' => $baseDir . '/src/Models/Livre/LivreManager.php',
-    'Core\\Model' => $baseDir . '/core/Model.php',
+    'Core\\Connect' => $baseDir . '/core/Connect.php',
+    'Core\\Request' => $baseDir . '/core/Request.php',
 );

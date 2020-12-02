@@ -4,7 +4,7 @@ namespace Core;
 
 use PDO;
 
-abstract class Model 
+abstract class Connect 
 {
     private static $pdo;
 

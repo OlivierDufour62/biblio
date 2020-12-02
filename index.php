@@ -25,7 +25,7 @@ try {
                 break;
             case "livres":
                 if (empty($url[1])) {
-                    $livreController->findAllLivres();
+                    $livreController->displayBook();
                 } else if ($url[1] === "l") {
                     $livreController->findOneLivre($url[2]);
                 } else if ($url[1] === "a") {
@@ -44,7 +44,7 @@ try {
                 break;
             case "formats":
                 if (empty($url[1])){
-                    $formatController->findAllFormats();
+                    $formatController->displayFormat();
                 } else if ($url[1] === "f"){
                     $formatController->findOneFormat($url[2]);
                 }

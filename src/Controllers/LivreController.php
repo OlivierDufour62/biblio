@@ -14,24 +14,24 @@ class LivreController
     public function __construct()
     {
         $this->livreManager = new LivreManager;
-        $this->livreManager->chargementLivres();
+        
     }
 
-    public function findAllLivres()
+    public function displayBook()
     {
-        $livres = $this->livreManager->getLivres();
-        require "views/livre.view.php";
+        $livres = $this->livreManager->findAll('livres');
+        require 'views/livre.php';
     }
 
     public function findOneLivre($id)
     {
-        $livre = $this->livreManager->getLivreById($id);
-        require "views/afficherlivre.view.php";
+        $livre = $this->livreManager->findById('livres', $id);
+        require "views/afficherlivre.php";
     }
 
     public function addLivre()
     {
-        require "views/ajoutlivre.view.php";
+        require "views/ajoutlivre.php";
     }
 
     public function ajoutLivreValidation()
@@ -49,7 +49,7 @@ class LivreController
 
     public function suppressionLivre($id)
     {
-        $nomImage = $this->livreManager->getLivreById($id)->getImage();
+        $nomImage = $this->livreManager->findById("livres",$id)->getImage();
         unlink("public/images/" . $nomImage);
         $this->livreManager->suppressionLivreBdd($id);
 
@@ -62,13 +62,13 @@ class LivreController
 
     public function updateLivre($id)
     {
-        $livre = $this->livreManager->getLivreById($id);
-        require "views/modifierlivre.view.php";
+        $livre = $this->livreManager->findById("livres",$id);
+        require "views/modifierlivre.php";
     }
 
     public function updateLivreValidation()
     {
-        $imageActuelle = $this->livreManager->getLivreById(htmlspecialchars($_POST['nbpage']))->getImage();
+        $imageActuelle = $this->livreManager->findById("livres",$_POST['identifiant'],htmlspecialchars($_POST['nbpage']))->getImage();
         $file = $_FILES['image'];
         if ($file['size'] > 0) {
             unlink("public/images/" . $imageActuelle);

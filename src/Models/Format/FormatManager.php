@@ -3,12 +3,12 @@
 namespace App\Models;
 
 
-Use Core\Model;
+Use Core\Request;
 Use App\Models\Format;
 use PDO;
 use Exception;
 
-class FormatManager extends Model
+class FormatManager extends Request
 {
 
     private $formats;
@@ -16,25 +16,6 @@ class FormatManager extends Model
     public function ajoutFormat($format)
     {
         $this->formats[] = $format;
-
-    }
-
-    public function getFormats()
-    {
-        return $this->formats;
-    }
-
-    public function chargementFormats()
-    {
-        $req = $this->getBdd()->prepare("SELECT * FROM format");
-        $req->execute();
-        $mesFormats = $req->fetchAll(PDO::FETCH_ASSOC);
-        $req->closeCursor();
-        foreach ($mesFormats as $format) {
-            $f = new Format($format['id'], $format['name']);
-            // var_dump($f);
-            $this->ajoutFormat($f);
-        }
     }
 
     public function getFormatById($id)

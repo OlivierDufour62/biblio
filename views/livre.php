@@ -18,19 +18,20 @@ endif;
         <th colspan="2">Actions</th>
     </tr>
     <?php
-    for ($i = 0; $i < count($livres); $i++) : ?>
+    foreach($livres as $livre){
+    ?>
         <tr>
-            <td class="align-middle"><img src="public/images/<?= $livres[$i]->getImage(); ?>" width="60px;"></td>
-            <td class="align-middle"><a href="<?= URL ?>livres/l/<?= $livres[$i]->getId(); ?>"><?= $livres[$i]->getTitre(); ?></a></td>
-            <td class="align-middle"><?= $livres[$i]->getNbPages(); ?></td>
-            <td class="align-middle"><a href="<?= URL ?>livres/m/<?= $livres[$i]->getId(); ?>" class="btn btn-warning">Modifier</a></td>
+            <td class="align-middle"><img src="public/images/<?= $livre['image']; ?>" width="60px;"></td>
+            <td class="align-middle"><a href="<?= URL ?>livres/l/<?= $livre['id']; ?>"><?= $livre['titre']; ?></a></td>
+            <td class="align-middle"><?= $livre['nbPages']; ?></td>
+            <td class="align-middle"><a href="<?= URL ?>livres/m/<?= $livre['id']; ?>" class="btn btn-warning">Modifier</a></td>
             <td class="align-middle">
-                <form method="POST" action="<?= URL ?>livres/s/<?= $livres[$i]->getId(); ?>" onSubmit="return confirm('Voulez-vous vraiment supprimer ce livre ?')">
+                <form method="POST" action="<?= URL ?>livres/s/<?= $livre['id']; ?>" onSubmit="return confirm('Voulez-vous vraiment supprimer ce livre ?')">
                     <button class="btn btn-danger" type="submit">Supprimer</button>
                 </form>
             </td> 
         </tr>
-    <?php endfor; ?>
+    <?php } ?>
 </table>
 <a href="<?= URL ?>livres/a" class="btn btn-success d-block">Ajouter</a>
 
