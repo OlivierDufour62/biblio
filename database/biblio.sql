@@ -68,8 +68,8 @@ CREATE TABLE `livres` (
     `id_Editeurs` INT(10) NOT NULL,
     PRIMARY KEY (`id`),
     FOREIGN KEY (`id_Authors`) REFERENCES authors(id),
-    FOREIGN KEY (`id_Format`) REFERENCES editeurs(id),
-    FOREIGN KEY (`id_Editeurs`) REFERENCES format(id)
+    FOREIGN KEY (`id_Format`) REFERENCES format(id),
+    FOREIGN KEY (`id_Editeurs`) REFERENCES editeurs(id)
 )ENGINE=innoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 COMMIT;

@@ -6,9 +6,10 @@ namespace App\Controllers;
 
 Use App\Models\FormatManager;
 Use App\Models\Format;
+use Core\Controller;
 use Exception;
 
-class FormatController
+class FormatController extends Controller
 {
     private $formatManager;
     private $format;
@@ -21,15 +22,14 @@ class FormatController
 
     public function findOneFormat($id)
     {
-        $format = $this->formatManager->getFormatById($id);
-        require 'views/oneformat.php';
+        $format = $this->format->findById($id);
+        $this->render('oneformat.php', ['format' => $format]);
     }
 
     public function displayFormat()
     {
         $format = $this->format->findAll('format');
-        // var_dump($format);
-        require 'views/format.php';
+        $this->render('format.php', ['format' => $format ]);
     }
 
 } 

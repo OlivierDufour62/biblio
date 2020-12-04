@@ -38,7 +38,9 @@ class ComposerStaticInit945200887320284573871def685e50fe
         'App\\Models\\Livre' => __DIR__ . '/../..' . '/src/Models/Livre/Livre.php',
         'App\\Models\\LivreManager' => __DIR__ . '/../..' . '/src/Models/Livre/LivreManager.php',
         'Core\\Connect' => __DIR__ . '/../..' . '/core/Connect.php',
+        'Core\\Controller' => __DIR__ . '/../..' . '/core/Controller.php',
         'Core\\Model' => __DIR__ . '/../..' . '/core/Model.php',
+        'Core\\Security' => __DIR__ . '/../..' . '/core/security.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

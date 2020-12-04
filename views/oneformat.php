@@ -4,10 +4,10 @@
 <div class="row">
 <div class="col-6">
     <p>
-        id: <?= $format->getId(); ?>
+        id: <?= $format['id']; ?>
     </p>
     <p>
-        nom : <?= utf8_encode($format->getName()); ?>
+        nom : <?= utf8_encode($format['name']); ?>
     </p>
 </div>
 </div>

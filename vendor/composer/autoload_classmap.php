@@ -15,5 +15,7 @@ return array(
     'App\\Models\\Livre' => $baseDir . '/src/Models/Livre/Livre.php',
     'App\\Models\\LivreManager' => $baseDir . '/src/Models/Livre/LivreManager.php',
     'Core\\Connect' => $baseDir . '/core/Connect.php',
+    'Core\\Controller' => $baseDir . '/core/Controller.php',
     'Core\\Model' => $baseDir . '/core/Model.php',
+    'Core\\Security' => $baseDir . '/core/security.php',
 );

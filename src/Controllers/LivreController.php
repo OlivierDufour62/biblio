@@ -7,10 +7,11 @@ use App\Models\Livre;
 use App\Models\Format;
 use App\Models\Editeurs;
 use App\Models\Authors;
-Use App\Models\LivreManager;
+use App\Models\LivreManager;
+use Core\Controller;
 use Exception;
 
-class LivreController
+class LivreController extends Controller
 {
     private $livreManager;
     private $livre;
@@ -30,14 +31,13 @@ class LivreController
     public function displayBook()
     {
         $livres = $this->livre->findAll();
-        require 'views/livre.php';
+        $this->render('livre.php', ['livres'=>$livres]);
     }
 
     public function findOneLivre($id)
     {
         $livre = $this->livre->findById($id);
-        var_dump($livre);
-        require "views/afficherlivre.php";
+        $this->render('afficherlivre.php', ['livre' => $livre]);
     }
 
     public function addLivre()
@@ -45,7 +45,7 @@ class LivreController
         $formats = $this->formats->findAll();
         $authors = $this->authors->findAll();
         $editeurs = $this->editeurs->findAll();
-        require "views/ajoutlivre.php";
+        $this->render('ajoutlivre.php', ['formats' => $formats, 'authors' => $authors, 'editeurs' => $editeurs]);
     }
 
     public function ajoutLivreValidation()
@@ -53,7 +53,7 @@ class LivreController
         $file = $_FILES['image'];
         $folder = "public/images/";
         $nomImageAjouter = $this->ajoutImage($file, $folder);
-        $this->livreManager->add(htmlspecialchars($_POST['titre']), htmlspecialchars($_POST['nbpage']), $nomImageAjouter, htmlspecialchars($_POST['select_format']),htmlspecialchars($_POST['select_editeurs']), htmlspecialchars($_POST['select_authors']));
+        $this->livreManager->add($this->secure('titre'), $this->secure('nbpage'), $nomImageAjouter, $this->secure('format'), $this->secure('select_editeurs'), $this->secure('select_authors'));
         $_SESSION['alert'] = [
             'type' => "success",
             'msg' => "Ajout réalisé"
@@ -76,12 +76,13 @@ class LivreController
     public function updateLivre($id)
     {
         $livre = $this->livre->findById($id);
-        require "views/modifierlivre.php";
+        // require "views/modifierlivre.php";
+        $this->render('modifierlivre.php', ['livre'=>$livre]);
     }
 
     public function updateLivreValidation()
     {
-        $imageActuelle = $this->livre->findById("livres",$_POST['identifiant'],htmlspecialchars($_POST['nbpage']))->getImage();
+        $imageActuelle = $this->livre->findById("livres", $this->secure('identifiant'), $this->secure('nbpage'))->getImage();
         $file = $_FILES['image'];
         if ($file['size'] > 0) {
             unlink("public/images/" . $imageActuelle);
@@ -90,26 +91,22 @@ class LivreController
         } else {
             $nomImageAjouter = $imageActuelle;
         }
-        $this->livreManager->updateLivreBdd(htmlspecialchars($_POST['identifiant']), htmlspecialchars($_POST['titre']), htmlspecialchars($_POST['nbpage']), $nomImageAjouter);
+        $this->livreManager->updateLivreBdd($this->secure('identifiant'), $this->secure('titre'), $this->secure('nbpage'), $nomImageAjouter);
         $_SESSION['alert'] = [
             'type' => "success",
             'msg' => "Modification réalisé"
         ];
         header('Location: ' . URL . "livres");
-
     }
 
     private function ajoutImage($file, $dir)
     {
         if (!isset($file['name']) || empty($file['name']))
             throw new Exception("Vous devez indiquer une image");
-
         if (!file_exists($dir)) mkdir($dir, 0777);
-
         $extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
         $random = rand(0, 99999);
         $target_file = $dir . $random . "_" . $file['name'];
-
         if (!getimagesize($file["tmp_name"]))
             throw new Exception("Le fichier n'est pas une image");
         if ($extension !== "jpg" && $extension !== "jpeg" && $extension !== "png" && $extension !== "gif")

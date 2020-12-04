@@ -34,12 +34,13 @@ class LivreManager
     public function add($titre, $nbPages, $image, $format, $editeur, $authors)
     {
         $req = "INSERT INTO livres(titre, nbPages, image, id_Format, id_Editeurs, id_Authors) VALUES (:titre,:nbPages,:image, :id_Format, :id_Editeurs, :id_Authors)";
+        $idFormat = $_POST['format'];
         $livre = new Livre();
         $stmt = $livre->getBdd()->prepare($req);
         $stmt->bindValue(":titre", $titre, PDO::PARAM_STR);
         $stmt->bindValue(":nbPages", $nbPages, PDO::PARAM_INT);
         $stmt->bindValue(":image", $image, PDO::PARAM_STR);
-        $stmt->bindValue(":id_Format", $format, PDO::PARAM_INT);
+        $stmt->bindValue(":id_Format", $idFormat, PDO::PARAM_INT);
         $stmt->bindValue(":id_Editeurs", $editeur, PDO::PARAM_INT);
         $stmt->bindValue(":id_Authors", $authors, PDO::PARAM_INT);
         $result = $stmt->execute();
@@ -48,11 +49,10 @@ class LivreManager
             $livre->setTitre($titre)
                 ->setNbPages($nbPages)
                 ->setImage($image)
-                ->setId_Format($format)
+                ->setId_Format($idFormat)
                 ->setId_Editeurs($editeur)
                 ->setId_Authors($authors);
         }
-
     }
 
     
