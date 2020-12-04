@@ -3,12 +3,10 @@
 namespace App\Models;
 
 
-Use Core\Request;
+Use Core\Model;
 Use App\Models\Format;
-use PDO;
-use Exception;
 
-class FormatManager extends Request
+class FormatManager
 {
 
     private $formats;

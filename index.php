@@ -16,7 +16,7 @@ $formatController = new FormatController;
 
 try {
     if (empty($_GET['page'])) {
-        require "views/accueil.view.php";
+        require "views/accueil.php";
     } else {
         $url = explode("/", filter_var($_GET['page']), FILTER_SANITIZE_URL);
         switch ($url[0]) {

@@ -15,12 +15,26 @@
     </div>
     <div class="form-group">
         <label for="select_format">Sélectionner un format</label>
-        <select class="form-control" id="select_format">
-            <option value="">1</option>
-            <option value="">2</option>
-            <option value="">3</option>
-            <option value="">4</option>
-            <option value="">5</option>
+        <select class="form-control" id="select_format" name="select_format">
+            <?php foreach ($formats as $format) { ?>
+                <option value=<?= $format['id'] ?>> <?= $format['name'] ?> </option>
+            <?php } ?>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="select_editeurs">Sélectionner un éditeurs</label>
+        <select class="form-control" id="select_editeurs" name="select_editeurs">
+            <?php foreach ($editeurs as $editeur) { ?>
+                <option value=<?= $editeur['id'] ?>> <?= $editeur['name'] ?> </option>
+            <?php } ?>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="select_authors">Sélectionner un éditeurs</label>
+        <select class="form-control" id="select_authors" name="select_authors">
+            <?php foreach ($authors as $author) { ?>
+                <option value=<?= $author['id'] ?>> <?= $author['name'] ?> </option>
+            <?php } ?>
         </select>
     </div>
     <button type="submit" class="btn btn-primary">Enregistrer</button>

@@ -31,12 +31,14 @@ class ComposerStaticInit945200887320284573871def685e50fe
     public static $classMap = array (
         'App\\Controllers\\FormatController' => __DIR__ . '/../..' . '/src/Controllers/FormatController.php',
         'App\\Controllers\\LivreController' => __DIR__ . '/../..' . '/src/Controllers/LivreController.php',
+        'App\\Models\\Authors' => __DIR__ . '/../..' . '/src/Models/Authors/Authors.php',
+        'App\\Models\\Editeurs' => __DIR__ . '/../..' . '/src/Models/Editeurs/Editeurs.php',
         'App\\Models\\Format' => __DIR__ . '/../..' . '/src/Models/Format/Format.php',
         'App\\Models\\FormatManager' => __DIR__ . '/../..' . '/src/Models/Format/FormatManager.php',
         'App\\Models\\Livre' => __DIR__ . '/../..' . '/src/Models/Livre/Livre.php',
         'App\\Models\\LivreManager' => __DIR__ . '/../..' . '/src/Models/Livre/LivreManager.php',
         'Core\\Connect' => __DIR__ . '/../..' . '/core/Connect.php',
-        'Core\\Request' => __DIR__ . '/../..' . '/core/Request.php',
+        'Core\\Model' => __DIR__ . '/../..' . '/core/Model.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

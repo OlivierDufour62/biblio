@@ -8,10 +8,12 @@ $baseDir = dirname($vendorDir);
 return array(
     'App\\Controllers\\FormatController' => $baseDir . '/src/Controllers/FormatController.php',
     'App\\Controllers\\LivreController' => $baseDir . '/src/Controllers/LivreController.php',
+    'App\\Models\\Authors' => $baseDir . '/src/Models/Authors/Authors.php',
+    'App\\Models\\Editeurs' => $baseDir . '/src/Models/Editeurs/Editeurs.php',
     'App\\Models\\Format' => $baseDir . '/src/Models/Format/Format.php',
     'App\\Models\\FormatManager' => $baseDir . '/src/Models/Format/FormatManager.php',
     'App\\Models\\Livre' => $baseDir . '/src/Models/Livre/Livre.php',
     'App\\Models\\LivreManager' => $baseDir . '/src/Models/Livre/LivreManager.php',
     'Core\\Connect' => $baseDir . '/core/Connect.php',
-    'Core\\Request' => $baseDir . '/core/Request.php',
+    'Core\\Model' => $baseDir . '/core/Model.php',
 );

@@ -1,13 +1,14 @@
 <?php
 
 namespace App\Models;
+
 Use Core\Model;
 
-Class Format extends Model
+Class Authors extends Model
 {
     private $id;
     private $name;
-    protected $table = 'format';
+    protected $table = 'authors';
 
     public function __construct()
     {

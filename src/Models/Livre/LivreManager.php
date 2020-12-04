@@ -3,26 +3,17 @@
 namespace App\Models;
 
 
-Use Core\Request;
+
 Use App\Models\Livre;
 use PDO;
 use Exception;
 
 
-class LivreManager extends Request
+class LivreManager
 {
     private $livres; //tableau de livre
 
     // ajoute au tableau un nouveau livre
-    public function ajoutLivre($livre)
-    {
-        $this->livres[] = $livre;
-    }
-
-    public function getLivres()
-    {
-        return $this->livres;
-    }
 
     // public function getLivreById($id)
     // {
@@ -40,38 +31,36 @@ class LivreManager extends Request
     //     throw new Exception("Le livre n'existe pas");
     // }
 
-    public function ajoutLivrebdd($titre, $nbPages, $image)
+    public function add($titre, $nbPages, $image, $format, $editeur, $authors)
     {
-        $req = "INSERT INTO livres(titre, nbPages, image) VALUES (:titre,:nbPages,:image)";
-        $stmt = $this->getBdd()->prepare($req);
+        $req = "INSERT INTO livres(titre, nbPages, image, id_Format, id_Editeurs, id_Authors) VALUES (:titre,:nbPages,:image, :id_Format, :id_Editeurs, :id_Authors)";
+        $livre = new Livre();
+        $stmt = $livre->getBdd()->prepare($req);
         $stmt->bindValue(":titre", $titre, PDO::PARAM_STR);
         $stmt->bindValue(":nbPages", $nbPages, PDO::PARAM_INT);
         $stmt->bindValue(":image", $image, PDO::PARAM_STR);
+        $stmt->bindValue(":id_Format", $format, PDO::PARAM_INT);
+        $stmt->bindValue(":id_Editeurs", $editeur, PDO::PARAM_INT);
+        $stmt->bindValue(":id_Authors", $authors, PDO::PARAM_INT);
         $result = $stmt->execute();
         $stmt->closeCursor();
         if ($result > 0) {
-            $livre = new Livre($this->getBdd()->lastInsertId(), $titre, $nbPages, $image);
-            $this->ajoutLivre($livre);
+            $livre->setTitre($titre)
+                ->setNbPages($nbPages)
+                ->setImage($image)
+                ->setId_Format($format)
+                ->setId_Editeurs($editeur)
+                ->setId_Authors($authors);
         }
+
     }
 
-    public function suppressionLivreBdd($id)
-    {
-        $req = "DELETE FROM livres WHERE id = :idLivre";
-        $stmt = $this->getBdd()->prepare($req);
-        $stmt->bindValue(":idLivre", $id, PDO::PARAM_INT);
-        $result = $stmt->execute();
-        $stmt->closeCursor();
-        if ($result > 0) {
-            $livre = $this->findById("livres",$id);
-            unset($livre);
-        }
-    }
+    
 
     public function updateLivreBdd($id, $titre, $nbPages, $image)
     {
         $req = "UPDATE livres SET titre=:titre, nbPages=:nbPages,image=:image WHERE id = :id";
-        $stmt = $this->getBdd()->prepare($req);
+        $stmt = $this->table->getBdd()->prepare($req);
         $stmt->bindValue(":id", $id, PDO::PARAM_INT);
         $stmt->bindValue(":titre", $titre, PDO::PARAM_STR);
         $stmt->bindValue(":nbPages", $nbPages, PDO::PARAM_INT);

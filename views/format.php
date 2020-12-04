@@ -6,13 +6,13 @@
         <th colspan="2">Actions</th>
     </tr>
     <?php
-    foreach($format as $result){
+    foreach($format as $result => $value){
     // for ($i = 0; $i < count($format); $i++) : ?>
         <tr>
-            <td class="align-middle"><a href="<?= URL ?>formats/f/<?= $result['id'] ?>"><?= $result['titre'] ?></a></td>
-            <td class="align-middle"><a href="<?= URL ?>formats/m/<?= $result['id'] ?>" class="btn btn-warning">Modifier</a></td>
+            <td class="align-middle"><a href="<?= URL ?>formats/f/<?= $value['id'] ?>"><?= $value['name'] ?></a></td>
+            <td class="align-middle"><a href="<?= URL ?>formats/m/<?= $value['id'] ?>" class="btn btn-warning">Modifier</a></td>
             <td class="align-middle">
-                <form method="POST" action="<?= URL ?>formats/s/<?= $result['id'] ?>" onSubmit="return confirm('Voulez-vous vraiment supprimer ce livre ?')">
+                <form method="POST" action="<?= URL ?>formats/s/<?= $value['id'] ?>" onSubmit="return confirm('Voulez-vous vraiment supprimer ce livre ?')">
                     <button class="btn btn-danger" type="submit">Supprimer</button>
                 </form>
             </td>

@@ -3,34 +3,48 @@
 
 namespace App\Controllers;
 
-
+use App\Models\Livre;
+use App\Models\Format;
+use App\Models\Editeurs;
+use App\Models\Authors;
 Use App\Models\LivreManager;
 use Exception;
 
 class LivreController
 {
     private $livreManager;
+    private $livre;
+    private $formats;
+    private $authors;
+    private $editeurs;
 
     public function __construct()
     {
         $this->livreManager = new LivreManager;
-        
+        $this->livre = new Livre();
+        $this->formats = new Format();
+        $this->authors = new Authors();
+        $this->editeurs = new Editeurs();
     }
 
     public function displayBook()
     {
-        $livres = $this->livreManager->findAll('livres');
+        $livres = $this->livre->findAll();
         require 'views/livre.php';
     }
 
     public function findOneLivre($id)
     {
-        $livre = $this->livreManager->findById('livres', $id);
+        $livre = $this->livre->findById($id);
+        var_dump($livre);
         require "views/afficherlivre.php";
     }
 
     public function addLivre()
     {
+        $formats = $this->formats->findAll();
+        $authors = $this->authors->findAll();
+        $editeurs = $this->editeurs->findAll();
         require "views/ajoutlivre.php";
     }
 
@@ -39,7 +53,7 @@ class LivreController
         $file = $_FILES['image'];
         $folder = "public/images/";
         $nomImageAjouter = $this->ajoutImage($file, $folder);
-        $this->livreManager->ajoutLivreBdd(htmlspecialchars($_POST['titre']), htmlspecialchars($_POST['nbpage']), $nomImageAjouter);
+        $this->livreManager->add(htmlspecialchars($_POST['titre']), htmlspecialchars($_POST['nbpage']), $nomImageAjouter, htmlspecialchars($_POST['select_format']),htmlspecialchars($_POST['select_editeurs']), htmlspecialchars($_POST['select_authors']));
         $_SESSION['alert'] = [
             'type' => "success",
             'msg' => "Ajout réalisé"
@@ -49,10 +63,9 @@ class LivreController
 
     public function suppressionLivre($id)
     {
-        $nomImage = $this->livreManager->findById("livres",$id)->getImage();
+        $nomImage = $this->livre->findById($id)->getImage();
         unlink("public/images/" . $nomImage);
-        $this->livreManager->suppressionLivreBdd($id);
-
+        $this->livre->delete($id);
         $_SESSION['alert'] = [
             'type' => "success",
             'msg' => "Suppression réalisé"
@@ -62,13 +75,13 @@ class LivreController
 
     public function updateLivre($id)
     {
-        $livre = $this->livreManager->findById("livres",$id);
+        $livre = $this->livre->findById($id);
         require "views/modifierlivre.php";
     }
 
     public function updateLivreValidation()
     {
-        $imageActuelle = $this->livreManager->findById("livres",$_POST['identifiant'],htmlspecialchars($_POST['nbpage']))->getImage();
+        $imageActuelle = $this->livre->findById("livres",$_POST['identifiant'],htmlspecialchars($_POST['nbpage']))->getImage();
         $file = $_FILES['image'];
         if ($file['size'] > 0) {
             unlink("public/images/" . $imageActuelle);

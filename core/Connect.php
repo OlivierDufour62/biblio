@@ -14,7 +14,7 @@ abstract class Connect
         self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
     }
 
-    protected function getBdd()
+    public function getBdd()
     {
         if(self::$pdo === null){
             self::setBdd();
