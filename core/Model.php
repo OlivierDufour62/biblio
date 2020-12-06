@@ -8,6 +8,8 @@ use PDO;
 abstract class Model extends Connect
 {
 
+    private $id;
+    
     public function findAll()
     {
         $req = $this->getBdd()->prepare("SELECT * FROM $this->table");
@@ -30,7 +32,7 @@ abstract class Model extends Connect
     {
         $req = "DELETE FROM $this->table WHERE id = :id";
         $stmt = $this->getBdd()->prepare($req);
-        $stmt->bindValu(':id', $this->id, PDO::PARAM_INT);
+        $stmt->bindValue(':id', $this->id, PDO::PARAM_INT);
         return $stmt->execute();
         $stmt->closeCursor();
     }
