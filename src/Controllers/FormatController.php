@@ -22,12 +22,14 @@ class FormatController extends Controller
 
     public function findOneFormat($id)
     {
+        $this->checkSession();
         $format = $this->format->findById($id);
         $this->render('oneformat.php', ['format' => $format]);
     }
 
     public function displayFormat()
     {
+        $this->checkSession();
         $format = $this->format->findAll('format');
         $this->render('format.php', ['format' => $format ]);
     }

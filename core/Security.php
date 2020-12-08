@@ -11,4 +11,11 @@ abstract class Security extends Model
     {
         return htmlspecialchars($_POST[$value]);
     }
+
+    public function checkSession()
+    {
+        if (isset($_SESSION)) {
+            header('Location:' . URL . 'connection');
+        }
+    }
 }

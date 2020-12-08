@@ -25,6 +25,10 @@
                         <a class="nav-link" href="<?= URL ?>livres">Livre
                         </a>
                     </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="<?= URL ?>disconnect">Déconnexion
+                        </a>
+                    </li>
                 </ul>
             </div>
         </nav>

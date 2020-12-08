@@ -30,18 +30,21 @@ class LivreController extends Controller
 
     public function displayBook()
     {
+        $this->checkSession();
         $livres = $this->livre->findAll();
-        return $this->render('livre.php', ['livres'=>$livres]);
+        return $this->render('livre.php', ['livres' => $livres]);
     }
 
     public function findOneLivre($id)
     {
+        $this->checkSession();
         $livre = $this->livre->findById($id);
         return $this->render('afficherlivre.php', ['livre' => $livre]);
     }
 
     public function addLivre()
     {
+        $this->checkSession();
         $formats = $this->formats->findAll();
         $authors = $this->authors->findAll();
         $editeurs = $this->editeurs->findAll();
@@ -64,7 +67,6 @@ class LivreController extends Controller
     public function suppressionLivre($id)
     {
         $nomImage = $this->livre->findById($id);
-
         unlink("public/images/" . $nomImage['image']);
         var_dump($nomImage['image']);
         $this->livre->delete($id);
@@ -77,9 +79,10 @@ class LivreController extends Controller
 
     public function updateLivre($id)
     {
+        $this->checkSession();
         $livre = $this->livre->findById($id);
         // require "views/modifierlivre.php";
-        return $this->render('modifierlivre.php', ['livre'=>$livre]);
+        return $this->render('modifierlivre.php', ['livre' => $livre]);
     }
 
     public function updateLivreValidation()

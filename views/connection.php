@@ -6,7 +6,7 @@
             <input type="text" placeholder="email" name="email">
         </div>
         <div class="form-control">
-            <input type="text" placeholder="mot de passe" name="password">
+            <input type="text" placeholder="mot de passe" name="pwd">
         </div>
         <button type="submit">coucou</button>
     </form>

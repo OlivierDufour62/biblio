@@ -34,7 +34,7 @@ abstract class Model extends Connect
         $req->execute([':email'=> $email]);
         $result = $req->fetch(PDO::FETCH_ASSOC);
         var_dump($req);
-        // $req->closeCursor();
+        $req->closeCursor();
         return $result;
     }
 
