@@ -2,7 +2,10 @@
 
 namespace Core;
 
-abstract class Security
+Use Core\Model;
+
+
+abstract class Security extends Model
 {
     public function secure($value)
     {

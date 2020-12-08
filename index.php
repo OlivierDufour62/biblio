@@ -6,6 +6,8 @@ session_start();
 
 Use App\Controllers\LivreController;
 use App\Controllers\FormatController;
+use App\Controllers\ConnectionController;
+
 
 define("URL", str_replace("index.php", "", (isset($_SERVER['HTTPS']) ? "https" : "http"). 
 "://$_SERVER[HTTP_HOST]$_SERVER[PHP_SELF]"));
@@ -13,6 +15,7 @@ define("URL", str_replace("index.php", "", (isset($_SERVER['HTTPS']) ? "https" :
 
 $livreController = new LivreController;
 $formatController = new FormatController;
+$auth = new ConnectionController;
 
 try {
     if (empty($_GET['page'])) {
@@ -20,8 +23,13 @@ try {
     } else {
         $url = explode("/", filter_var($_GET['page']), FILTER_SANITIZE_URL);
         switch ($url[0]) {
+            case "connection":
+                if(empty($_SESSION)){
+                $auth->login();
+                break;
+            } 
             case "accueil":
-                require "views/accueil.view.php";
+                require "views/accueil.php";
                 break;
             case "livres":
                 if (empty($url[1])) {
@@ -52,6 +60,7 @@ try {
             default:
                 throw new Exception("La page n'existe pas");
         }
+    
     }
 } catch (Exception $e) {
     $msg =  $e->getMessage();

@@ -31,13 +31,13 @@ class LivreController extends Controller
     public function displayBook()
     {
         $livres = $this->livre->findAll();
-        $this->render('livre.php', ['livres'=>$livres]);
+        return $this->render('livre.php', ['livres'=>$livres]);
     }
 
     public function findOneLivre($id)
     {
         $livre = $this->livre->findById($id);
-        $this->render('afficherlivre.php', ['livre' => $livre]);
+        return $this->render('afficherlivre.php', ['livre' => $livre]);
     }
 
     public function addLivre()
@@ -45,7 +45,7 @@ class LivreController extends Controller
         $formats = $this->formats->findAll();
         $authors = $this->authors->findAll();
         $editeurs = $this->editeurs->findAll();
-        $this->render('ajoutlivre.php', ['formats' => $formats, 'authors' => $authors, 'editeurs' => $editeurs]);
+        return $this->render('ajoutlivre.php', ['formats' => $formats, 'authors' => $authors, 'editeurs' => $editeurs]);
     }
 
     public function ajoutLivreValidation()
@@ -79,7 +79,7 @@ class LivreController extends Controller
     {
         $livre = $this->livre->findById($id);
         // require "views/modifierlivre.php";
-        $this->render('modifierlivre.php', ['livre'=>$livre]);
+        return $this->render('modifierlivre.php', ['livre'=>$livre]);
     }
 
     public function updateLivreValidation()

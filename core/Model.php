@@ -28,11 +28,21 @@ abstract class Model extends Connect
         return $result;
     }
 
+    public function findBy($email)
+    {
+        $req = $this->getBdd()->prepare("SELECT * FROM $this->table WHERE email = :email");
+        $req->execute([':email'=> $email]);
+        $result = $req->fetch(PDO::FETCH_ASSOC);
+        var_dump($req);
+        // $req->closeCursor();
+        return $result;
+    }
+
     public function delete()
     {
         $req = "DELETE FROM $this->table WHERE id = :id";
         $stmt = $this->getBdd()->prepare($req);
-        $stmt->bindValue(':id', $this->id, PDO::PARAM_INT);
+        $stmt->bindValue(':id', $this->id, PDO::PARAM_INT);  
         return $stmt->execute();
         $stmt->closeCursor();
     }

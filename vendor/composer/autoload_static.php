@@ -29,6 +29,7 @@ class ComposerStaticInit945200887320284573871def685e50fe
     );
 
     public static $classMap = array (
+        'App\\Controllers\\ConnectionController' => __DIR__ . '/../..' . '/src/Controllers/ConnectionController.php',
         'App\\Controllers\\FormatController' => __DIR__ . '/../..' . '/src/Controllers/FormatController.php',
         'App\\Controllers\\LivreController' => __DIR__ . '/../..' . '/src/Controllers/LivreController.php',
         'App\\Models\\Authors' => __DIR__ . '/../..' . '/src/Models/Authors/Authors.php',
@@ -37,10 +38,12 @@ class ComposerStaticInit945200887320284573871def685e50fe
         'App\\Models\\FormatManager' => __DIR__ . '/../..' . '/src/Models/Format/FormatManager.php',
         'App\\Models\\Livre' => __DIR__ . '/../..' . '/src/Models/Livre/Livre.php',
         'App\\Models\\LivreManager' => __DIR__ . '/../..' . '/src/Models/Livre/LivreManager.php',
+        'App\\Models\\Users' => __DIR__ . '/../..' . '/src/Models/Users/Users.php',
+        'App\\Security\\ConnectionAuthenticator' => __DIR__ . '/../..' . '/src/Security/ConnectionAuthenticator.php',
         'Core\\Connect' => __DIR__ . '/../..' . '/core/Connect.php',
         'Core\\Controller' => __DIR__ . '/../..' . '/core/Controller.php',
         'Core\\Model' => __DIR__ . '/../..' . '/core/Model.php',
-        'Core\\Security' => __DIR__ . '/../..' . '/core/security.php',
+        'Core\\Security' => __DIR__ . '/../..' . '/core/Security.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
