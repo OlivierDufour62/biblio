@@ -28,9 +28,10 @@ abstract class Model extends Connect
 
     public function delete($id)
     {
-        $req = "DELETE FROM $this->table WHERE $id";
+        $req = "DELETE FROM $this->table WHERE id = $id";
         $stmt = $this->getBdd()->prepare($req);
-        $stmt->execute();
+        var_dump($req);
+        $stmt->execute([':id' => $id]);
         $stmt->closeCursor();
     }
 }

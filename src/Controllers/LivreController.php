@@ -67,14 +67,13 @@ class LivreController extends Controller
     public function suppressionLivre($id)
     {
         $nomImage = $this->livre->findById($id);
-        var_dump($nomImage);
         unlink("public/images/" . $nomImage['image']);
         $this->livre->delete($id);
         $_SESSION['alert'] = [
             'type' => "success",
             'msg' => "Suppression réalisé"
         ];
-        // header('Location: ' . URL . "livres");
+        header('Location: ' . URL . "livres");
     }
 
     public function updateLivre($id)

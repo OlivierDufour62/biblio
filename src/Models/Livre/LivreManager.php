@@ -18,13 +18,7 @@ class LivreManager extends Livre
         // $idFormat = $_POST['format'];
         $livre = new Livre();
         $stmt = $livre->getBdd()->prepare($req);
-        $stmt->bindValue(":titre", $titre, PDO::PARAM_STR);
-        $stmt->bindValue(":nbPages", $nbPages, PDO::PARAM_INT);
-        $stmt->bindValue(":image", $image, PDO::PARAM_STR);
-        $stmt->bindValue(":id_Format", $format, PDO::PARAM_INT);
-        $stmt->bindValue(":id_Editeurs", $editeur, PDO::PARAM_INT);
-        $stmt->bindValue(":id_Authors", $authors, PDO::PARAM_INT);
-        $result = $stmt->execute();
+        $result = $stmt->execute([':titre' => $titre, ':nbPages' => $nbPages, ':image' => $image, ':id_Format' => $format, ':id_Editeurs' => $editeur, ':id_Authors' => $authors]);
         $stmt->closeCursor();
         if ($result > 0) {
             $livre->setTitre($titre)

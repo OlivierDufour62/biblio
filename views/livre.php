@@ -25,11 +25,7 @@ endif;
             <td class="align-middle"><a href="<?= URL ?>livres/l/<?= $livre['id']; ?>"><?= $livre['titre']; ?></a></td>
             <td class="align-middle"><?= $livre['nbPages']; ?></td>
             <td class="align-middle"><a href="<?= URL ?>livres/m/<?= $livre['id']; ?>" class="btn btn-warning">Modifier</a></td>
-            <td class="align-middle">
-                <form method="POST" action="<?= URL ?>livres/s/<?= $livre['id']; ?>" onSubmit="return confirm('Voulez-vous vraiment supprimer ce livre ?')">
-                    <button class="btn btn-danger" type="submit">Supprimer</button>
-                </form>
-            </td>
+            <td class="align-middle"><a href="<?= URL ?>livres/s/<?= $livre['id']; ?>" class="btn btn-danger" type="submit">Supprimer</a></td>
         </tr>
     <?php } ?>
 </table>
