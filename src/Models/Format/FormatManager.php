@@ -3,10 +3,10 @@
 namespace App\Models;
 
 
-Use Core\Model;
-Use App\Models\Format;
+use Core\Model;
+use App\Models\Format;
 
-class FormatManager
+class FormatManager extends Format
 {
 
     private $formats;
@@ -16,12 +16,30 @@ class FormatManager
         $this->formats[] = $format;
     }
 
-    // public function getFormatById($id)
-    // {
-    //     for($i = 0; count($this->formats); $i++){
-    //         if($this->formats[$i]->getId() === $id){
-    //             return $this->formats[$i];
-    //         }
-    //     }
-    // }
+    public function add($name)
+    {
+        $req = "INSERT INTO `format`(`name`) VALUES (:name)";
+        $stmt = $this->getBdd()->prepare($req);
+        $result = $stmt->execute([':name' => $name]);
+        $stmt->closeCursor();
+        if ($result > 0) {
+            foreach ($result as $name) {
+                $this->setName($name);
+            }
+        }
+    }
+
+    public function updateFormat($id, $name)
+    {
+        $req = "UPDATE $this->table SET id = :id, name = :name WHERE id = :id";
+        var_dump($req);
+        $stmt = $this->getBdd()->prepare($req);
+        $result = $stmt->execute([':id' => $id, ':name' => $name]);
+        $stmt->closeCursor();
+        if ($result > 0) {
+            foreach ($result as $name) {
+                $this->findById($id)->setName($name);
+            }
+        }
+    }
 }

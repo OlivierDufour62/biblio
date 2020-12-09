@@ -19,6 +19,7 @@
         </tr>
     <?php } ?>
 </table>
+<a href="<?= URL ?>formats/a" class="btn btn-success d-block">Ajouter</a>
 
 <?php
 $titre = 'Format';

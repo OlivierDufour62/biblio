@@ -24,18 +24,46 @@ class FormatController extends Controller
     {
         $this->checkSession();
         $format = $this->format->findById($id);
-        $this->render('oneformat.php', ['format' => $format]);
+        return $this->render('oneformat.php', ['format' => $format]);
     }
 
     public function displayFormat()
     {
         $this->checkSession();
         $format = $this->format->findAll('format');
-        $this->render('format.php', ['format' => $format ]);
+        return $this->render('format.php', ['format' => $format ]);
     }
 
-    public function updateFormat()
+    public function addFormat()
     {
-        
+        return $this->render('addformat.php');
+    }
+
+    public function addFormatValidation()
+    {
+        $this->formatManager->add($this->secure('name'));
+        header('Location:' . URL . 'formats');
+    }
+
+    public function updateFormat($id)
+    {
+        $uFormat = $this->format->findById($id);
+        return $this->render('modifierformat.php', ['format'=> $uFormat]);
+    }
+
+    public function updateFormatValidation()
+    {
+        $this->formatManager->updateFormat($this->secure('identifiant'), $this->secure('name'));
+        $_SESSION['alert'] = [
+            'type' => "success",
+            'msg' => "Modification réalisé"
+        ];
+        header('Location: ' . URL . "formats");
+    }
+
+    public function deleteFormat($id)
+    {
+        $this->format->delete($id);
+        header('Location: ' . URL . "formats");
     }
 } 

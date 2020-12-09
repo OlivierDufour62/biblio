@@ -86,7 +86,6 @@ class LivreController extends Controller
         return $this->render('modifierlivre.php', ['livre' => $livre, 'formats' => $formats, 'authors' => $authors, 'editeurs' => $editeurs]);
     }
 
-    //continuer la fonction ci dessous :
     public function updateLivreValidation()
     {
         $imageActuelle = $this->livre->findById($this->secure('identifiant'));

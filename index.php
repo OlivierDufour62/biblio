@@ -60,7 +60,17 @@ try {
                     $formatController->displayFormat();
                 } else if ($url[1] === "f") {
                     $formatController->findOneFormat($url[2]);
-                }
+                } else if ($url[1] === "a") {
+                    $formatController->addFormat();
+                } else if ($url[1] === "av") {
+                    $formatController->addFormatValidation();
+                } else if ($url[1] === "m") {
+                    $formatController->updateFormat($url[2]);
+                } else if ($url[1] === "mfv") {
+                    $formatController->updateFormatValidation();
+                } else if ($url[1] === "s") {
+                    $formatController->deleteFormat($url[2]);
+                } 
                 break;
             default:
                 throw new Exception("La page n'existe pas");

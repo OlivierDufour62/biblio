@@ -16,12 +16,11 @@ class LivreManager extends Livre
     {
         $req = "INSERT INTO livres(titre, nbPages, image, id_Format, id_Editeurs, id_Authors) VALUES (:titre,:nbPages,:image, :id_Format, :id_Editeurs, :id_Authors)";
         // $idFormat = $_POST['format'];
-        $livre = new Livre();
-        $stmt = $livre->getBdd()->prepare($req);
+        $stmt = $this->getBdd()->prepare($req);
         $result = $stmt->execute([':titre' => $titre, ':nbPages' => $nbPages, ':image' => $image, ':id_Format' => $format, ':id_Editeurs' => $editeur, ':id_Authors' => $authors]);
         $stmt->closeCursor();
         if ($result > 0) {
-            $livre->setTitre($titre)
+            $this->setTitre($titre)
                 ->setNbPages($nbPages)
                 ->setImage($image)
                 ->setId_Format($format)
@@ -33,8 +32,7 @@ class LivreManager extends Livre
     public function updateLivreBdd($id, $titre, $nbPages, $image, $format, $editeur, $authors)
     {
         $req = "UPDATE livres SET titre=:titre, nbPages=:nbPages, image=:image, id_Format=:id_Format, id_Editeurs=:id_Editeurs, id_Authors=:id_Authors  WHERE id = :id";
-        $livre = new Livre();
-        $stmt = $livre->getBdd()->prepare($req);
+        $stmt = $this->getBdd()->prepare($req);
         $result = $stmt->execute([':id' => $id, ':titre' => $titre, ':nbPages' => $nbPages, ':image' => $image, ':id_Format' => $format, ':id_Editeurs' => $editeur, ':id_Authors' => $authors]);
         $stmt->closeCursor();
         if ($result > 0) {
