@@ -34,4 +34,8 @@ class FormatController extends Controller
         $this->render('format.php', ['format' => $format ]);
     }
 
+    public function updateFormat()
+    {
+        
+    }
 } 

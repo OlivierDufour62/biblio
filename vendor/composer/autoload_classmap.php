@@ -15,6 +15,7 @@ return array(
     'App\\Models\\FormatManager' => $baseDir . '/src/Models/Format/FormatManager.php',
     'App\\Models\\Livre' => $baseDir . '/src/Models/Livre/Livre.php',
     'App\\Models\\LivreManager' => $baseDir . '/src/Models/Livre/LivreManager.php',
+    'App\\Models\\UserManager' => $baseDir . '/src/Models/Users/UserManager.php',
     'App\\Models\\Users' => $baseDir . '/src/Models/Users/Users.php',
     'App\\Security\\ConnectionAuthenticator' => $baseDir . '/src/Security/ConnectionAuthenticator.php',
     'Core\\Connect' => $baseDir . '/core/Connect.php',

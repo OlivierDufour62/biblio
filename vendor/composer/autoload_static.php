@@ -38,6 +38,7 @@ class ComposerStaticInit945200887320284573871def685e50fe
         'App\\Models\\FormatManager' => __DIR__ . '/../..' . '/src/Models/Format/FormatManager.php',
         'App\\Models\\Livre' => __DIR__ . '/../..' . '/src/Models/Livre/Livre.php',
         'App\\Models\\LivreManager' => __DIR__ . '/../..' . '/src/Models/Livre/LivreManager.php',
+        'App\\Models\\UserManager' => __DIR__ . '/../..' . '/src/Models/Users/UserManager.php',
         'App\\Models\\Users' => __DIR__ . '/../..' . '/src/Models/Users/Users.php',
         'App\\Security\\ConnectionAuthenticator' => __DIR__ . '/../..' . '/src/Security/ConnectionAuthenticator.php',
         'Core\\Connect' => __DIR__ . '/../..' . '/core/Connect.php',

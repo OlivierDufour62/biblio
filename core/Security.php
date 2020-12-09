@@ -14,8 +14,10 @@ abstract class Security extends Model
 
     public function checkSession()
     {
-        if (isset($_SESSION)) {
+        if (!isset($_SESSION)) {
             header('Location:' . URL . 'connection');
+        } else {
+            
         }
     }
 }

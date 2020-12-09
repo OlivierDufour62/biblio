@@ -67,8 +67,8 @@ class LivreController extends Controller
     public function suppressionLivre($id)
     {
         $nomImage = $this->livre->findById($id);
+        var_dump($nomImage);
         unlink("public/images/" . $nomImage['image']);
-        var_dump($nomImage['image']);
         $this->livre->delete($id);
         $_SESSION['alert'] = [
             'type' => "success",
@@ -81,22 +81,26 @@ class LivreController extends Controller
     {
         $this->checkSession();
         $livre = $this->livre->findById($id);
-        // require "views/modifierlivre.php";
-        return $this->render('modifierlivre.php', ['livre' => $livre]);
+        $formats = $this->formats->findAll();
+        $authors = $this->authors->findAll();
+        $editeurs = $this->editeurs->findAll();
+        return $this->render('modifierlivre.php', ['livre' => $livre, 'formats' => $formats, 'authors' => $authors, 'editeurs' => $editeurs]);
     }
 
+    //continuer la fonction ci dessous :
     public function updateLivreValidation()
     {
-        $imageActuelle = $this->livre->findById("livres", $this->secure('identifiant'), $this->secure('nbpage'))->getImage();
+        $imageActuelle = $this->livre->findById($this->secure('identifiant'));
         $file = $_FILES['image'];
-        if ($file['size'] > 0) {
-            unlink("public/images/" . $imageActuelle);
-            $folder = "public/images/";
-            $nomImageAjouter = $this->ajoutImage($file, $folder);
-        } else {
-            $nomImageAjouter = $imageActuelle;
-        }
-        $this->livreManager->updateLivreBdd($this->secure('identifiant'), $this->secure('titre'), $this->secure('nbpage'), $nomImageAjouter);
+            if ($file['size'] > 0) {
+                var_dump($imageActuelle['image']);
+                unlink("public/images/" . $imageActuelle['image']);
+                $folder = "public/images/";
+                $nomImageAjouter = $this->ajoutImage($file, $folder);
+            } else {
+                $nomImageAjouter = $imageActuelle;
+            }
+        $this->livreManager->updateLivreBdd($this->secure('identifiant'), $this->secure('titre'), $this->secure('nbPages'), $nomImageAjouter, $this->secure('format'), $this->secure('select_editeurs'), $this->secure('select_authors'));
         $_SESSION['alert'] = [
             'type' => "success",
             'msg' => "Modification réalisé"

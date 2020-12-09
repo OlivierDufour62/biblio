@@ -6,9 +6,9 @@ if (!empty($_SESSION['alert'])) :
     <div class="alert alert-<?= $_SESSION['alert']['type'] ?>" role="alert">
         <?= $_SESSION['alert']['msg'] ?>
     </div>
-<?php 
-unset($_SESSION['alert']);
-endif; 
+<?php
+    unset($_SESSION['alert']);
+endif;
 ?>
 <table class="table text-center">
     <tr class="table-dark">
@@ -18,7 +18,7 @@ endif;
         <th colspan="2">Actions</th>
     </tr>
     <?php
-    foreach($livres as $livre){
+    foreach ($livres as $livre) {
     ?>
         <tr>
             <td class="align-middle"><img src="public/images/<?= $livre['image']; ?>" width="60px;"></td>
@@ -29,7 +29,7 @@ endif;
                 <form method="POST" action="<?= URL ?>livres/s/<?= $livre['id']; ?>" onSubmit="return confirm('Voulez-vous vraiment supprimer ce livre ?')">
                     <button class="btn btn-danger" type="submit">Supprimer</button>
                 </form>
-            </td> 
+            </td>
         </tr>
     <?php } ?>
 </table>
