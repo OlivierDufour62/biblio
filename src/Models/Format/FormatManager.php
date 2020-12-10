@@ -16,19 +16,6 @@ class FormatManager extends Format
         $this->formats[] = $format;
     }
 
-    public function add($name)
-    {
-        $req = "INSERT INTO `format`(`name`) VALUES (:name)";
-        $stmt = $this->getBdd()->prepare($req);
-        $result = $stmt->execute([':name' => $name]);
-        $stmt->closeCursor();
-        if ($result > 0) {
-            foreach ($result as $name) {
-                $this->setName($name);
-            }
-        }
-    }
-
     public function updateFormat($id, $name)
     {
         $req = "UPDATE $this->table SET id = :id, name = :name WHERE id = :id";
@@ -41,5 +28,10 @@ class FormatManager extends Format
                 $this->findById($id)->setName($name);
             }
         }
+    }
+
+    public function __toString()
+    {
+        return __CLASS__;
     }
 }

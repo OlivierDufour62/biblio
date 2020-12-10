@@ -5,7 +5,7 @@ require_once 'vendor/autoload.php';
 session_start();
 
 use App\Controllers\LivreController;
-use App\Controllers\FormatController;
+use App\Controllers\CharacteristicController;
 use App\Controllers\ConnectionController;
 
 
@@ -14,7 +14,7 @@ define("URL", str_replace("index.php", "", (isset($_SERVER['HTTPS']) ? "https" :
 
 
 $livreController = new LivreController;
-$formatController = new FormatController;
+$CharacteristicController = new CharacteristicController;
 $auth = new ConnectionController;
 
 try {
@@ -26,8 +26,8 @@ try {
             case "connection":
                 if (isset($_SESSION)) {
                     $auth->login();
-                break;
-                } 
+                    break;
+                }
             case "disconnect":
                 if (isset($_SESSION)) {
                     $auth->logout();
@@ -57,20 +57,37 @@ try {
                 break;
             case "formats":
                 if (empty($url[1])) {
-                    $formatController->displayFormat();
+                    $CharacteristicController->displayFormat();
                 } else if ($url[1] === "f") {
-                    $formatController->findOneFormat($url[2]);
+                    $CharacteristicController->findOneFormat($url[2]);
                 } else if ($url[1] === "a") {
-                    $formatController->addFormat();
+                    $CharacteristicController->addFormat();
                 } else if ($url[1] === "av") {
-                    $formatController->addFormatValidation();
+                    $CharacteristicController->addCharacteristicValidation();
                 } else if ($url[1] === "m") {
-                    $formatController->updateFormat($url[2]);
+                    $CharacteristicController->updateFormat($url[2]);
                 } else if ($url[1] === "mfv") {
-                    $formatController->updateFormatValidation();
+                    $CharacteristicController->updateFormatValidation();
                 } else if ($url[1] === "s") {
-                    $formatController->deleteFormat($url[2]);
-                } 
+                    $CharacteristicController->deleteFormat($url[2]);
+                }
+                break;
+            case "editeurs":
+                if (empty($url[1])) {
+                    $CharacteristicController->displayEditeurs();
+                } else if ($url[1] === "f") {
+                    $CharacteristicController->findOneFormat($url[2]);
+                } else if ($url[1] === "a") {
+                    $CharacteristicController->addEditeurs();
+                } else if ($url[1] === "av") {
+                    $CharacteristicController->addCharacteristicValidation();
+                } else if ($url[1] === "m") {
+                    $CharacteristicController->updateFormat($url[2]);
+                } else if ($url[1] === "mfv") {
+                    $CharacteristicController->updateFormatValidation();
+                } else if ($url[1] === "s") {
+                    $CharacteristicController->deleteFormat($url[2]);
+                }
                 break;
             default:
                 throw new Exception("La page n'existe pas");

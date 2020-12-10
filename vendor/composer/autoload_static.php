@@ -29,11 +29,12 @@ class ComposerStaticInit945200887320284573871def685e50fe
     );
 
     public static $classMap = array (
+        'App\\Controllers\\CharacteristicController' => __DIR__ . '/../..' . '/src/Controllers/CharacteristicController.php',
         'App\\Controllers\\ConnectionController' => __DIR__ . '/../..' . '/src/Controllers/ConnectionController.php',
-        'App\\Controllers\\FormatController' => __DIR__ . '/../..' . '/src/Controllers/FormatController.php',
         'App\\Controllers\\LivreController' => __DIR__ . '/../..' . '/src/Controllers/LivreController.php',
         'App\\Models\\Authors' => __DIR__ . '/../..' . '/src/Models/Authors/Authors.php',
         'App\\Models\\Editeurs' => __DIR__ . '/../..' . '/src/Models/Editeurs/Editeurs.php',
+        'App\\Models\\EditeursManager' => __DIR__ . '/../..' . '/src/Models/Editeurs/EditeursManager.php',
         'App\\Models\\Format' => __DIR__ . '/../..' . '/src/Models/Format/Format.php',
         'App\\Models\\FormatManager' => __DIR__ . '/../..' . '/src/Models/Format/FormatManager.php',
         'App\\Models\\Livre' => __DIR__ . '/../..' . '/src/Models/Livre/Livre.php',

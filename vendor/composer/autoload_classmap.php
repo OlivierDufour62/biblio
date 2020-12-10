@@ -6,11 +6,12 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Controllers\\CharacteristicController' => $baseDir . '/src/Controllers/CharacteristicController.php',
     'App\\Controllers\\ConnectionController' => $baseDir . '/src/Controllers/ConnectionController.php',
-    'App\\Controllers\\FormatController' => $baseDir . '/src/Controllers/FormatController.php',
     'App\\Controllers\\LivreController' => $baseDir . '/src/Controllers/LivreController.php',
     'App\\Models\\Authors' => $baseDir . '/src/Models/Authors/Authors.php',
     'App\\Models\\Editeurs' => $baseDir . '/src/Models/Editeurs/Editeurs.php',
+    'App\\Models\\EditeursManager' => $baseDir . '/src/Models/Editeurs/EditeursManager.php',
     'App\\Models\\Format' => $baseDir . '/src/Models/Format/Format.php',
     'App\\Models\\FormatManager' => $baseDir . '/src/Models/Format/FormatManager.php',
     'App\\Models\\Livre' => $baseDir . '/src/Models/Livre/Livre.php',

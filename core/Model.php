@@ -34,5 +34,18 @@ abstract class Model extends Connect
         $stmt->execute([':id' => $id]);
         $stmt->closeCursor();
     }
+
+    public function addCharacteristicBook($name)
+    {
+        $req = "INSERT INTO $this->table(`name`) VALUES (:name)";
+        $stmt = $this->getBdd()->prepare($req);
+        $result = $stmt->execute([':name' => $name]);
+        $stmt->closeCursor();
+        if ($result > 0) {
+            foreach ($result as $name) {
+                $this->table->setName($name);
+            }
+        }
+    }
 }
 

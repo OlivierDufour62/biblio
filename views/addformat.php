@@ -1,6 +1,6 @@
 <?php ob_start(); ?>
 
-<form method="POST" action="<?= URL ?>formats/av" enctype="multipart/form-data">
+<form method="POST" action="<?= URL ?>editeurs/av" enctype="multipart/form-data">
     <div class="form-group">
         <label for="name">Nom : </label>
         <input type="text" class="form-control" id="name" name="name">
