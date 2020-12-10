@@ -74,7 +74,6 @@ class CharacteristicController extends Controller
     {
         $editeurs = explode('\\' , strval($this->editeursManager));
         $format = explode('\\' , strval($this->formatManager));
-        // $editeurs = explode('\\' , strval($this->editeursManager));
         $testEditeurs = lcfirst($editeurs[2]);
         $testFormat = lcfirst($format[2]);
         if ($this->nameManager === $testFormat) {
