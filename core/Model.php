@@ -19,8 +19,8 @@ abstract class Model extends Connect
 
     public function findById($id)
     {
-        $req = $this->getBdd()->prepare("SELECT * FROM $this->table WHERE $id");
-        $req->execute();
+        $req = $this->getBdd()->prepare("SELECT * FROM $this->table WHERE id = $id");
+        $req->execute([':id' => $id]);
         $result = $req->fetch(PDO::FETCH_ASSOC);
         $req->closeCursor();
         return $result;
@@ -30,7 +30,6 @@ abstract class Model extends Connect
     {
         $req = "DELETE FROM $this->table WHERE id = $id";
         $stmt = $this->getBdd()->prepare($req);
-        var_dump($req);
         $stmt->execute([':id' => $id]);
         $stmt->closeCursor();
     }

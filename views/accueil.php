@@ -1,5 +1,4 @@
 <?php ob_start(); 
-var_dump($_SESSION);
 ?>
 
 kikou
