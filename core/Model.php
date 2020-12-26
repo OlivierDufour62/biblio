@@ -3,11 +3,11 @@
 namespace Core;
 
 Use Core\Connect;
+use Core\Manager;
 use PDO;
 
-abstract class Model extends Connect
+abstract class Model extends Manager
 {
-    
     public function findAll()
     {
         $req = $this->getBdd()->prepare("SELECT * FROM $this->table");

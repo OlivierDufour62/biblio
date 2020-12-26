@@ -6,6 +6,8 @@ namespace App\Controllers;
 use App\Models\Editeurs;
 use App\Models\EditeursManager;
 use App\Models\FormatManager;
+use App\Models\AuteursManager;
+use App\Models\Authors;
 use App\Models\Format;
 use Core\Controller;
 use Exception;
@@ -22,8 +24,10 @@ class CharacteristicController extends Controller
     {
         $this->formatManager = new FormatManager;
         $this->editeursManager = new EditeursManager;
+        $this->auteursManager = new AuteursManager;
         $this->format = new Format;
         $this->editeur = new Editeurs;
+        $this->auteurs = new Authors;
         $this->url2 = explode("/", filter_var($_GET['page']), FILTER_SANITIZE_URL);
         $this->nameManager = $this->url2[0] . 'Manager';
     }
@@ -49,39 +53,49 @@ class CharacteristicController extends Controller
         return $this->render('editeurs.php', ['editeurs' => $editeurs]);
     }
 
-    public function addFormat()
+    public function displayAuthors()
     {
-        return $this->render('addformat.php');
+        $this->checkSession();
+        $auteurs = $this->auteurs->findAll('authors');
+        return $this->render('auteurs.php', ['auteurs' => $auteurs]);
     }
 
-    // public function addFormatValidation()
-    // {
-    //     $this->formatManager->addCharacteristicBook($this->secure('name'));
-    //     header('Location:' . URL . 'formats');
-    // }
+    public function addFormat()
+    {
+        return $this->render('addcharac.php');
+    }
 
     public function addEditeurs()
     {
-        $coucou = explode('\\' , strval($this->editeursManager));
-        $test = lcfirst($coucou[2]);
-        var_dump($test);
-        var_dump($this->nameManager === $test);
-        return $this->render('addformat.php');
+        // $name = explode('\\' , strval($this->editeursManager));
+        // $test = lcfirst($name[2]);
+        // var_dump($test);
+        // var_dump($this->nameManager === $test);
+        return $this->render('addcharac.php');
     }
 
-    //a finir 
+    public function addAuteurs()
+    {
+        return $this->render('addcharac.php');
+    }
+
     public function addCharacteristicValidation()
     {
         $editeurs = explode('\\' , strval($this->editeursManager));
         $format = explode('\\' , strval($this->formatManager));
+        $authors = explode('\\' , strval($this->auteursManager));
         $testEditeurs = lcfirst($editeurs[2]);
         $testFormat = lcfirst($format[2]);
+        $testAuthors = lcfirst($authors[2]);
         if ($this->nameManager === $testFormat) {
             $this->formatManager->addCharacteristicBook($this->secure('name'));
-            header('Location:' . URL . 'formats');
+            header('Location:' . URL . 'format');
         } else if ($this->nameManager === $testEditeurs) {
             $this->editeursManager->addCharacteristicBook($this->secure('name'));
             header('Location:' . URL . 'editeurs');
+        } else if ($this->nameManager === $testAuthors) {
+            $this->auteursManager->addCharacteristicBook($this->secure('name'));
+            header('Location:' . URL . 'auteurs');
         }
     }
 

@@ -15,39 +15,38 @@ class LivreController extends Controller
 {
     private $livreManager;
     private $livre;
-    private $formats;
-    private $authors;
-    private $editeurs;
 
     public function __construct()
     {
         $this->livreManager = new LivreManager;
         $this->livre = new Livre();
-        $this->formats = new Format();
-        $this->authors = new Authors();
-        $this->editeurs = new Editeurs();
     }
 
     public function displayBook()
     {
         $this->checkSession();
-        $livres = $this->livre->findAll();
+        $livres = $this->getManager(Livre::class)->findAll();
         return $this->render('livre.php', ['livres' => $livres]);
     }
 
     public function findOneLivre($id)
     {
+        //voir avec chahir pour ma requete inner join 
         $this->checkSession();
-        $livre = $this->livre->findById($id);
-        return $this->render('afficherlivre.php', ['livre' => $livre]);
+        $livre = $this->livreManager->selectLivre($id);
+        // dd($livre);
+        $format = $this->getManager(Format::class)->findById($livre['id_Format']);
+        $authors = $this->getManager(Authors::class)->findById($livre['id_Authors']);
+        $editeurs = $this->getManager(Editeurs::class)->findById($livre['id_Editeurs']);
+        return $this->render('afficherlivre.php', ['livre' => $livre, 'format' => $format, 'authors' => $authors, 'editeurs' => $editeurs]);
     }
 
     public function addLivre()
     {
         $this->checkSession();
-        $formats = $this->formats->findAll();
-        $authors = $this->authors->findAll();
-        $editeurs = $this->editeurs->findAll();
+        $formats = $this->getManager(Format::class)->findAll();
+        $authors = $this->getManager(Authors::class)->findAll();
+        $editeurs = $this->getManager(Editeurs::class)->findAll();
         return $this->render('ajoutlivre.php', ['formats' => $formats, 'authors' => $authors, 'editeurs' => $editeurs]);
     }
 

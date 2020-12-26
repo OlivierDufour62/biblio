@@ -14,6 +14,15 @@
     <p>
         nombre de page : <?= $livre['nbPages']; ?>
     </p>
+    <p>
+        éditeurs <?= $editeurs['name']; ?>
+    </p>
+    <p>
+        format <?= $format['name']; ?>
+    </p>
+    <p>
+        Auteur <?= $authors['name']; ?>
+    </p>
 </div>
 </div>
 

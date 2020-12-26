@@ -1,6 +1,7 @@
 $(document).ready(function () {
-    console.log('coucou');
-    var url = document.location.href;
+    var url = window.location.pathname;
     var urlsplit = url.split('/');
-    console.log(urlsplit);
+    $('#testurl').attr('action', 'http://localhost/biblio/' +  urlsplit[2] + '/av');
+    console.log(urlsplit[2].split('s'));
+    $('.linkadd').attr('href', 'http://localhost/biblio/' +  urlsplit[2] + '/a');
 });

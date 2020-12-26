@@ -55,7 +55,7 @@ try {
                     throw new Exception("La page n'existe pas");
                 }
                 break;
-            case "formats":
+            case "format":
                 if (empty($url[1])) {
                     $CharacteristicController->displayFormat();
                 } else if ($url[1] === "f") {
@@ -79,6 +79,23 @@ try {
                     $CharacteristicController->findOneFormat($url[2]);
                 } else if ($url[1] === "a") {
                     $CharacteristicController->addEditeurs();
+                } else if ($url[1] === "av") {
+                    $CharacteristicController->addCharacteristicValidation();
+                } else if ($url[1] === "m") {
+                    $CharacteristicController->updateFormat($url[2]);
+                } else if ($url[1] === "mfv") {
+                    $CharacteristicController->updateFormatValidation();
+                } else if ($url[1] === "s") {
+                    $CharacteristicController->deleteFormat($url[2]);
+                }
+                break;
+            case "auteurs":
+                if (empty($url[1])) {
+                    $CharacteristicController->displayAuthors();
+                } else if ($url[1] === "f") {
+                    $CharacteristicController->findOneFormat($url[2]);
+                } else if ($url[1] === "a") {
+                    $CharacteristicController->addAuteurs();
                 } else if ($url[1] === "av") {
                     $CharacteristicController->addCharacteristicValidation();
                 } else if ($url[1] === "m") {

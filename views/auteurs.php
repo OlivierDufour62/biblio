@@ -6,7 +6,7 @@
         <th colspan="2">Actions</th>
     </tr>
     <?php
-    foreach($editeurs as $result => $value){
+    foreach($auteurs as $result => $value){
     // for ($i = 0; $i < count($format); $i++) : ?>
         <tr>
             <td class="align-middle"><a href="<?= URL ?>formats/f/<?= $value['id'] ?>"><?= $value['name'] ?></a></td>
@@ -22,6 +22,6 @@
 <a class="btn btn-success d-block linkadd">Ajouter</a>
 
 <?php
-$titre = 'Éditeurs';
+$titre = 'Auteurs';
 $content = ob_get_clean();
 require 'template.php';

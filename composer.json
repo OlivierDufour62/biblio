@@ -4,5 +4,8 @@
             "App\\" : "src",
             "Core\\": "core"
         }
+    },
+    "require": {
+        "symfony/var-dumper": "^5.2"
     }
 }

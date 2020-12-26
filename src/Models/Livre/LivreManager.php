@@ -46,4 +46,15 @@ class LivreManager extends Livre
             }
         }
     }
+
+    public function selectLivre($id)
+    {
+        $req = "SELECT * FROM livres INNER JOIN editeurs ON id_Editeurs INNER JOIN authors ON id_Authors INNER JOIN format ON id_Format WHERE livres.id = $id";
+        $stmt = $this->getBdd()->prepare($req);
+        // dd($req);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $stmt->closeCursor();
+        return $result;
+    }
 }
